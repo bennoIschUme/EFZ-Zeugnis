@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notenübersicht</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container, .login-container {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .login-container {
+            display: block;
+        }
+        .container {
+            display: none;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .login-input {
+            margin: 5px 0;
+            padding: 8px;
+            width: 200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" class="login-input" placeholder="Benutzername">
+    <input type="password" id="password" class="login-input" placeholder="Passwort">
+    <button onclick="login()">Einloggen</button>
+</div>
+
+<div class="container" id="contentContainer">
+    <h1>Willkommen, Julian Mossner (ME21c)</h1>
+    Semester:
+    <select id="semester" onchange="addModules()">
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4">Semester 4</option>
+        <option value="5">Semester 5</option>
+        <option value="6">Semester 6</option>
+        <option value="7">Semester 7</option>
+        <option value="8">Semester 8</option>
+    </select>
+    <table id="gradesTable">
+        <tr>
+            <th>Modul</th>
+            <th>Note</th>
+        </tr>
+        <!-- Die Module und Noten werden hier eingefügt -->
+    </table>
+</div>
+
+<script>
+    function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if(username === 'julian_mossner' && password === 'hallo123') {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('contentContainer').style.display = 'block';
+            addModules();
+        } else {
+            alert('Falscher Benutzername oder Passwort');
+        }
+    }
+
+    function addModules() {
+        var table = document.getElementById('gradesTable');
+        var semester = document.getElementById('semester').value;
+        // Entferne alle vorherigen Einträge, außer der Kopfzeile
+        table.innerHTML = '<tr><th>Modul</th><th>Note</th></tr>';
+
+        // Hier wird die Logik zum Hinzufügen der Module eingefügt
+        for (var i = 0; i < 5; i++) {
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var modulNummer = Math.floor(Math.random() * 900) + 100; // Zufallszahl zwischen 100 und 999
+            var note = (Math.floor(Math.random() * 9) + 4) / 2; // Zufallsnote zwischen 2.0 und 6.0
+            cell1.innerHTML = 'Modul ' + modulNummer;
+            cell2.innerHTML = note.toFixed(1);
+        }
+    }
+</script>
+
+</body>
+</html>
